@@ -11,12 +11,20 @@ IMAGE_SIZE = 32
 SCALE_FACTOR = [2, 3, 4]
 CHANNELS = [1, 3]
 BATCH_SIZE = [1, 2]
-MODELS = [models.Bicubic, models.SRCNN, models.VDSR, models.ESPCN]
+MODELS = [
+    models.Bicubic, models.SRCNN, models.VDSR, models.ESPCN,
+    models.SRResNet, models.EDSR
+]
 params = list(itertools.product(MODELS, SCALE_FACTOR, CHANNELS, BATCH_SIZE))
 
 
 @pytest.mark.parametrize("module, scale_factor, channels, batch_size", params)
 def test_models(module, scale_factor, channels, batch_size):
+
+    # SRResNet only supports scale_factor 2 or 4
+    if scale_factor == 3 and module in [models.SRResNet, models.EDSR]:
+        return
+
     model = module(scale_factor, channels)
     lr = jnp.ones((batch_size, IMAGE_SIZE, IMAGE_SIZE, channels))
     params = model.init(jax.random.PRNGKey(0), lr)
