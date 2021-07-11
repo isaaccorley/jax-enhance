@@ -1,20 +1,11 @@
 ## jax-enhance
 
 --------------------------------------------------------------------------------
-jax-enhance is a jax implementation of the [pytorch-enhance library](https://github.com/isaaccorley/pytorch-enhance). This is mostly for my education/experimentation with jax however you may find these implementations useful.
+jax-enhance is a jax implementation of the [pytorch-enhance library](https://github.com/isaaccorley/pytorch-enhance). This is mostly for my own education/experimentation with jax however you may find these implementations useful.
 
 ## Installation
-
-### pip
 ```
-pip install jax-enhance
-```
-
-### latest
-```
-git clone https://github.com/isaaccorley/jax-enhance.git
-cd jax-enhance
-python setup.py install
+pip install git+https://github.com/isaaccorley/jax-enhance
 ```
 
 ## Models
