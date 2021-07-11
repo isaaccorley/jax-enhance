@@ -3,9 +3,12 @@ from setuptools import setup, find_packages
 __version__ = "0.0.1"
 url = "https://github.com/isaaccorley/jax-enhance"
 
-with open("requirements.txt", "r") as f:
-    install_requires = f.read().strip().splitlines()
-
+install_requires = [
+    "jax>=0.2.17",
+    "flax>=0.3.4",
+    "einops>=0.3.0",
+    #"flaxvision @ git+https://://git@github.com/rolandgvc/flaxvision@master"
+]
 setup_requires = ['pytest-runner']
 tests_require = ['pytest', 'pytest-cov', 'mock']
 
