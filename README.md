@@ -25,9 +25,9 @@ from jax.random import PRNGKey
 import jax_enhance
 
 # increase resolution by factor of 2 (e.g. 128x128 -> 256x256)
-model = jax_enhance.models.SRResNet(scale_factor=2, channels=3)
+model = jax_enhance.models.SRResNet(scale_factor=2, channels=3, dtype=jnp.float32)
 
-lr = jnp.ones(1, 128, 128, 3)
+lr = jnp.ones((1, 128, 128, 3), dtype=jnp.float32)
 params = model.init(PRNGKey(0), lr)
 sr = model.apply(params, lr) #[1, 256, 256, 3]
 ```
