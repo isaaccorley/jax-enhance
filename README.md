@@ -27,15 +27,18 @@ The following models are currently implemented:
 * **EDSR** from Lim et. al [Enhanced Deep Residual Networks for Single Image Super-Resolution](https://arxiv.org/pdf/1707.02921v1.pdf)
 
 ```python
-from jax import random
-from haiku import PRNGSequence
+import jax
+import jax.numpy as jnp
+from jax.random import PRNGKey
+
 import jax_enhance
 
 # increase resolution by factor of 2 (e.g. 128x128 -> 256x256)
 model = jax_enhance.models.SRResNet(scale_factor=2, channels=3)
 
-lr = random.randn(1, 3, 128, 128)
-sr = model(x) # [1, 3, 256, 256]
+lr = jnp.ones(1, 128, 128, 3)
+params = model.init(PRNGKey(0), lr)
+sr = model.apply(params, lr) #[1, 256, 256, 3]
 ```
 
 ## State-of-the-Art
