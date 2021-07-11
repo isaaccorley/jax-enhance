@@ -47,9 +47,19 @@ Not sure which models are currently the best? Check out the [PapersWithCode Imag
 ## Losses
 
 * **Perceptual Loss (VGG16)**
+* **L1 Loss**
+* **L2 Loss**
+* **Peak-Signal-Noise-Ratio (PSNR) Loss**
 
 ## Metrics
 
 * **Mean Squared Error (MSE)**
 * **Mean Absolute Error (MAE)**
-* **Peak-Signal-Noise-Ratio (PSNR)**
+* **PSNR**
+
+## Other layers not available in Flax
+
+* **PixelShuffle**
+* **Upsample**
+* **Sequential**
+* **PReLU**
