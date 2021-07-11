@@ -20,7 +20,7 @@ class ESPCN(nn.Module):
             relu,
             nn.Conv(features=self.channels * self.scale_factor ** 2, kernel_size=(3, 3)),
         ])
-        self.upsample = PixelShuffle(self.scale_factor)
+        self.upsample = PixelShuffle(self.scale_factor, self.channels)
 
     def __call__(self, x: jnp.ndarray) -> jnp.ndarray:
         x = self.layers(x)

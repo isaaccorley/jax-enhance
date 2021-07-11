@@ -25,13 +25,15 @@ class Upsample(nn.Module):
 
 class PixelShuffle(nn.Module):
     scale_factor: int
+    channels: int
 
     def setup(self):
-        self.layer = partial(einops.rearrange(
-            pattern="b h w (h2 w2) -> b (h h2) (w w2) ()",
+        self.layer = partial(
+            einops.rearrange,
+            pattern="b h w (h2 w2 c) -> b (h h2) (w w2) c",
             h2=self.scale_factor,
             w2=self.scale_factor
-        ))
+        )
 
     def __call__(self, x: jnp.ndarray) -> jnp.ndarray:
         return self.layer(x)
