@@ -1,14 +1,18 @@
+import jax
 import jax.numpy as jnp
 
 
 __all__ = ["mse", "mae", "psnr"]
 
 
-def mse(y_pred: jnp.ndarray, y_true: jnp.ndarray) -> jnp.ndarray:
-    return jnp.mean(jnp.square(y_true - y_pred))
+@jax.jit
+def mse(predictions: jnp.ndarray, targets: jnp.ndarray) -> jnp.ndarray:
+    return jnp.mean(jnp.square(targets - predictions))
 
-def mae(y_pred: jnp.ndarray, y_true: jnp.ndarray) -> jnp.ndarray:
-    return jnp.mean(jnp.abs(y_true - y_pred))
+@jax.jit
+def mae(predictions: jnp.ndarray, targets: jnp.ndarray) -> jnp.ndarray:
+    return jnp.mean(jnp.abs(targets - predictions))
 
-def psnr(y_pred: jnp.ndarray, y_true: jnp.ndarray) -> jnp.ndarray:
-    return 10 * jnp.log10(1 / mse(y_pred, y_true))
+@jax.jit
+def psnr(predictions: jnp.ndarray, targets: jnp.ndarray) -> jnp.ndarray:
+    return 10 * jnp.log10(1 / mse(predictions, targets))
